@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14
+# Use an official Node.js runtime as a parent image (Node 18 to support newer packages)
+FROM node:18
 
 # Set the working directory in the container
 WORKDIR /app
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json into the container
 COPY package*.json ./
 
-# Install any needed packages specified in package.json
-RUN npm install
+# Install dependencies
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code into the container
 COPY . .
