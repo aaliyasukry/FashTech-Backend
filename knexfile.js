@@ -8,7 +8,7 @@ module.exports = {
   development: {
     client: 'mssql',
     connection: {
-      host: '192.168.8.109', // Your SQL Server address
+      host: '192.168.8.155', // Your SQL Server address
       user: 'admin', // Your SQL Server username
       password: 'Complex@123', // Your SQL Server password
       database: 'FashTech', // Your database name

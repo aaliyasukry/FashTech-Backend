@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 8080
 
 # Define environment variable (optional, if your app depends on it)
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 # Run the app when the container launches
 CMD ["npm", "start"]
