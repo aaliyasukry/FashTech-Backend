@@ -5,7 +5,8 @@ const itemRoutes = require('./routes/itemRoutes');
 const variantRoutes = require('./routes/variantRoutes');
 const pieceRoutes = require('./routes/pieceRoutes');
 const requestRoutes = require('./routes/requestRoutes');
-const shoppingBagRoutes = require('./routes/shoppingBagRoutes');
+const bagRoutes = require('./routes/bagRoutes');
+const bagItemRoutes = require('./routes/bagItemRoutes');
 const rfidRoutes = require('./routes/rfidRoutes');
 
 const app = express();
@@ -23,7 +24,8 @@ app.use('/api/Items', itemRoutes);
 app.use('/api/variants', variantRoutes);
 app.use('/api/pieces', pieceRoutes);
 app.use('/api/requests', requestRoutes);
-app.use('/api/shoppingBags', shoppingBagRoutes);
+app.use('/api/bags', bagRoutes);
+app.use('/api/bag-items', bagItemRoutes);
 app.use('/api/rfid', rfidRoutes);
 
 app.get('/', (req, res) => {

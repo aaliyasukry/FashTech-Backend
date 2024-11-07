@@ -1,4 +1,3 @@
-// src/models/itemModel.js
 const knex = require('../config/database');
 
 class Item {

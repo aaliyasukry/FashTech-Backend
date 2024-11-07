@@ -1,6 +1,6 @@
 const { messaging } = require('firebase-admin');
 const db = require('../config/firebaseConfig');
-const ShoppingBag = require('../models/ShoppingBag');
+const Bag = require('../models/Bag');  // Use Bag model here
 const Piece = require('../models/Piece');
 const Variant = require('../models/Variant');
 
@@ -46,16 +46,17 @@ const checkRFIDFromListener = async (rfid) => {
         console.log("RFID provided:", rfid);
         
         const allPieces = await Piece.getAll();
-        const allBags = await ShoppingBag.getAll();
+        const allBags = await Bag.getAll();  // Use Bag model here
         console.log(allBags);
 
         const pieceExists = allPieces.find(piece => piece.TagUID === rfid);
-        const bagExists = allBags.find(bag => bag.BagRFID === rfid);
+        const bagExists = allBags.find(bag => bag.BagRFID === rfid);  // Check against Bag table
         const variantData = await Variant.getById(pieceExists.VariantId);
+        
         if (bagExists) {
             return {
                 success: true,
-                message: "RFID exists in ShoppingBag",
+                message: "RFID exists in Bag",
                 type: "bag",
                 data: bagExists,
             };
@@ -75,7 +76,7 @@ const checkRFIDFromListener = async (rfid) => {
 
         return {
             success: false,
-            message: "RFID does not exist in either ShoppingBag or Pieces",
+            message: "RFID does not exist in either Bag or Pieces",
         };
     } catch (error) {
         console.error("Error checking RFID:", error);
