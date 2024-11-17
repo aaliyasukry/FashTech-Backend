@@ -2,6 +2,7 @@ const Category = require('../models/Category');
 
 exports.createCategory = async (req, res) => {
     try {
+        console.log('Request Body:', req.body); 
         const { name } = req.body;
 
         // Validate input
@@ -9,7 +10,10 @@ exports.createCategory = async (req, res) => {
             return res.status(400).json({ message: "Category name is required" });
         }
 
+        console.log('Attempting to create category with name:', name);
+
         const [id] = await Category.create(name);
+        console.log('Category created with ID:', id);
         return res.status(201).json({
             success: true,
             message: "Category created successfully",
@@ -64,7 +68,6 @@ exports.getCategoryById = async (req, res) => {
 exports.updateCategory = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
-
     try {
         const updated = await Category.update(id, name);
         if (!updated) {

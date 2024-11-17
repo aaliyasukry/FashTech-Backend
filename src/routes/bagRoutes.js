@@ -10,4 +10,8 @@ router.get('/:bagId', BagController.getBagDetails);
 
 router.get('/', BagController.getAllBags);
 
+router.put('/:bagId', BagController.updateBag);
+
+router.delete('/:bagId', BagController.deleteBag);
+
 module.exports = router;

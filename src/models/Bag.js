@@ -14,8 +14,27 @@ class Bag {
         return knex('Bags').where('BagID', bagId).first();
     }
 
+    static async findByRFID(bagRFID) {
+        return knex('Bags').where('BagRFID', bagRFID).first();
+    }
+
     static async getAll() {
         return knex('Bags').select('*');
+    }
+
+    // Update a bag's RFID by BagID
+    static async update(bagId, bagRFID) {
+        return knex('Bags')
+            .where('BagID', bagId)
+            .update({
+                BagRFID: bagRFID,
+                UpdatedAt: new Date()
+            });
+    }
+
+    // Delete a bag by its BagID
+    static async delete(bagId) {
+        return knex('Bags').where('BagID', bagId).del();
     }
 }
 

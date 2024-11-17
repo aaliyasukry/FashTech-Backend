@@ -44,15 +44,67 @@ const getBagDetails = async (req, res) => {
 const getAllBags = async (req, res) => {
     try {
         const bags = await Bag.getAll(); // Assume Bag.getAll() fetches all bags
-        res.json(bags);
+        return res.status(200).json({
+            success: true,
+            data: bags
+        });
     } catch (error) {
         console.error("Error fetching bags:", error);
-        res.status(500).json({ error: "Failed to fetch bags" });
+        return res.status(500).json({
+            success: false,
+            message: "An error occurred while fetching bags",
+            error: error.message
+        });
+    }
+};
+
+// Update an existing bag
+const updateBag = async (req, res) => {
+    const { bagId } = req.params;
+    const { bagRFID } = req.body;
+
+    if (!bagRFID) {
+        return res.status(400).json({ error: 'Bag RFID is required' });
+    }
+
+    try {
+        const bag = await Bag.findById(bagId);
+        if (!bag) {
+            return res.status(404).json({ error: 'Bag not found' });
+        }
+
+        // Update the bag's RFID
+        await Bag.update(bagId, bagRFID);
+
+        res.status(200).json({ message: 'Bag updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error updating bag' });
+    }
+};
+
+// Delete a bag
+const deleteBag = async (req, res) => {
+    const { bagId } = req.params;
+
+    try {
+        const bag = await Bag.findById(bagId);
+        if (!bag) {
+            return res.status(404).json({ error: 'Bag not found' });
+        }
+
+        await Bag.delete(bagId);
+        res.status(200).json({ message: 'Bag deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error deleting bag' });
     }
 };
 
 module.exports = {
     createBag,
     getBagDetails,
-    getAllBags
+    getAllBags,
+    updateBag,
+    deleteBag
 };

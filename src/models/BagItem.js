@@ -17,7 +17,7 @@ class BagItem {
                 .join('Pieces', 'BagItems.PieceId', 'Pieces.PieceId')
                 .join('Variants', 'Pieces.VariantId', 'Variants.VariantId')
                 .join('Items', 'Variants.ItemId', 'Items.ItemId')
-                .select('Items.Name', 'Variants.SizeLabel', 'Variants.ColorName', 'Items.Price', 'BagItems.Quantity')
+                .select('Items.Name', 'Variants.SizeLabel', 'Variants.ColorName', 'Variants.ImageURL', 'Items.Price', 'BagItems.Quantity')
                 .where('BagItems.BagId', bagId);
 
             return result;

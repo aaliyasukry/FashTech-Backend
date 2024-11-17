@@ -74,6 +74,7 @@ exports.getItemById = async (req, res) => {
 exports.updateItem = async (req, res) => {
     const { id } = req.params;
     const { Name, Description, Price, StockQuantity, CategoryId, Material, Type } = req.body;
+    console.log("Request body in backend:", req.body);
 
     try {
         const updated = await Item.update(id, {

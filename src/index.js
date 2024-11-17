@@ -8,6 +8,7 @@ const requestRoutes = require('./routes/requestRoutes');
 const bagRoutes = require('./routes/bagRoutes');
 const bagItemRoutes = require('./routes/bagItemRoutes');
 const rfidRoutes = require('./routes/rfidRoutes');
+const adminRfidRoutes = require('./routes/adminRfidRoutes');
 
 const app = express();
 const port = 8080;
@@ -27,6 +28,7 @@ app.use('/api/requests', requestRoutes);
 app.use('/api/bags', bagRoutes);
 app.use('/api/bag-items', bagItemRoutes);
 app.use('/api/rfid', rfidRoutes);
+app.use('/api/adminRfid', adminRfidRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the FashTech Backend! This is a temporary route for testing.');

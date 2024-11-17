@@ -12,6 +12,10 @@ module.exports = {
       user: 'admin', // Your SQL Server username
       password: 'Password-2', // Your SQL Server password
       database: 'FashTech', // Your database name
+      options: {
+        requestTimeout: 30000,
+        acquireTimeout: 30000,
+      }
     },
     migrations: {
       tableName: 'migrations'
